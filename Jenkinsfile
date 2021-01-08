@@ -3,7 +3,7 @@ pipeline {
     
     tools
     {
-       maven "Maven"
+       maven "maven"
     }
      
     stages {
@@ -14,31 +14,13 @@ pipeline {
              
           }
         }
-         stage('Tools Init') {
-            steps {
-                script {
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-               def tfHome = tool name: 'Ansible'
-                env.PATH = "${tfHome}:${env.PATH}"
-                 sh 'ansible --version'
-                    
-            }
-            }
-        }
-     
-        
+      
          stage('Execute Maven') {
            steps {
              
                 sh 'mvn package'             
           }
         }
-        
-        
-         
-        
-        
         
         stage('Ansible Deploy') {
              
